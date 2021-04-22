@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="cordova-plugin-toastyplugin" version="0.0.1">
+    id="ToastyPlugin" version="0.0.1">
     <name>ToastyPlugin</name>
 
     <description>An Android Cordova plugin that allows users to display simple Toast messages at the bottom of the screen.</description>
@@ -18,13 +18,23 @@
     <js-module src="www/toastyplugin.js" name="toastyPlugin">
         <clobbers target="window.plugins.toastyPlugin" />
     </js-module>
+    <js-module src="www/oktaplugin.js" name="oktaPlugin">
+        <clobbers target="window.plugins.oktaPlugin" />
+    </js-module>
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="ToastyPlugin">
-                <param name="android-package" value="com.stanleyidesis.cordova.plugin.ToastyPlugin"/>
+                <param name="android-package" value="com.shorteststraw.cordova.plugin.ToastyPlugin"/>
+            </feature>
+            <feature name="OktaPlugin">
+                <param name="android-package" value="com.shorteststraw.cordova.plugin.OktaPlugin"/>
             </feature>
         </config-file>
 
-        <source-file src="src/android/ToastyPlugin.java" target-dir="src/com/ntelesd/cordova/plugin" />
+        <framework src="build.gradle" custom="true" type="gradleReference" />
+        <framework src="src/android/okta.gradle" custom="true" type="gradleReference" />
+
+        <source-file src="src/android/ToastyPlugin.java" target-dir="src/com/shorteststraw/cordova/plugin" />
+        <source-file src="src/android/OktaPlugin.java" target-dir="src/com/shorteststraw/cordova/plugin" />
     </platform>
 </plugin>

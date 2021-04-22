@@ -1,0 +1,105 @@
+android {
+    /*defaultConfig {
+        manifestPlaceholders = [
+                "appAuthRedirectScheme": "com.shorteststraw.okta"
+        ]
+    }*/
+
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.shorteststraw.okta"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", "\"https://dev-62426961.okta.com\"")
+        manifestPlaceholders = [
+                hostName:"https://dev-62426961.okta.com",
+                "appAuthRedirectScheme": "com.shorteststraw.okta"
+        ]
+        if (project.rootProject.file('local.properties').exists()) {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            def username = properties.getProperty('test.username')
+            def password = properties.getProperty('test.password')
+            if (username != null && password != null) {
+                buildConfigField "String", "USERNAME", username
+                buildConfigField "String", "PASSWORD", password
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
+}
+
+/*repositories {
+    maven {
+        url  "https://dl.bintray.com/okta/com.okta.android"
+    }
+}*/
+
+dependencies {
+    /*implementation fileTree(include: ['*.aar'], dir: 'libs')
+
+    implementation 'com.okta.android:oidc-androidx:1.0.18'
+    implementation 'com.okta.authn.sdk:okta-authn-sdk-api:2.0.0'
+    implementation('com.okta.authn.sdk:okta-authn-sdk-impl:2.0.0') {
+        exclude group: 'com.okta.sdk', module: 'okta-sdk-httpclient'
+    }
+    implementation 'com.okta.sdk:okta-sdk-okhttp:2.0.0'*/
+
+    implementation fileTree(include: ['*.aar'], dir: 'libs')
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
+
+    implementation 'com.okta.android:oidc-androidx:1.0.16'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation "androidx.browser:browser:1.2.0"
+    implementation "androidx.fragment:fragment:1.2.5"
+    implementation 'androidx.biometric:biometric:1.1.0-beta01'
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    implementation 'com.okta.authn.sdk:okta-authn-sdk-api:2.0.0'
+    runtimeOnly 'com.okta.authn.sdk:okta-authn-sdk-impl:2.0.0'
+    runtimeOnly 'com.okta.sdk:okta-sdk-okhttp:2.0.0'
+    runtimeOnly 'com.squareup.okhttp3:okhttp:4.9.0'
+
+    implementation "io.reactivex.rxjava2:rxjava:2.2.8"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Espresso dependencies
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-web:3.3.0'
+    androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.3.0'
+
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    androidTestImplementation 'org.hamcrest:hamcrest-integration:1.3'
+
+
+}
+

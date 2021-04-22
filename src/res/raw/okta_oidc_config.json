@@ -1,0 +1,11 @@
+{
+  "client_id": "0oal19297i0RZZO4A5d6",
+  "redirect_uri": "com.shorteststraw.okta:/callback",
+  "end_session_redirect_uri": "com.shorteststraw.okta:/logout",
+  "scopes": [
+    "openid",
+    "profile",
+    "offline_access"
+  ],
+  "discovery_uri": "https://dev-62426961.okta.com/"
+}
